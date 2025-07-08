@@ -112,6 +112,12 @@ const menuItems = [
   },
 ];
 
+/**
+ * Renders the third level of the menu (child menu).
+ * @param {object} props - The component props.
+ * @param {object} props.subItem - The menu item object which contains a submenu to be rendered as a child menu.
+ * @returns {JSX.Element} The rendered child menu list.
+ */
 const ChildMenu = ({ subItem }) => {
   return (
     <>
@@ -131,6 +137,17 @@ const ChildMenu = ({ subItem }) => {
     </>
   );
 };
+
+/**
+ * Renders the second level of the menu (submenu).
+ * It can also contain and render a third level (child menu).
+ * @param {object} props - The component props.
+ * @param {object} props.item - The parent menu item containing the submenu to render.
+ * @param {boolean} props.isSideBarToggled - Flag indicating if the main sidebar is toggled open.
+ * @param {Function} props.toggleChildMenu - Function to toggle the visibility of a child menu.
+ * @param {object} props.openChildMenu - State object indicating which child menus are open.
+ * @returns {JSX.Element} The rendered submenu list.
+ */
 const SubMenu = ({
   item,
   isSideBarToggled,
@@ -173,21 +190,52 @@ const SubMenu = ({
     </>
   );
 };
+
+/**
+ * The main Sidebar component.
+ * It renders a collapsible navigation menu with multiple levels.
+ * It manages its own state for toggling the sidebar and opening/closing submenus.
+ * @returns {JSX.Element} The rendered Sidebar component.
+ */
 const Sidebar = () => {
+  /**
+   * State to manage the open/closed status of the first-level submenus.
+   * The key is the index of the menu item, and the value is a boolean.
+   * Allows only one submenu to be open at a time.
+   * @type {[object, Function]}
+   */
   const [openSubMenu, setOpenSubMenu] = useState({});
+  /**
+   * State to manage the toggled (expanded/collapsed) state of the entire sidebar.
+   * @type {[boolean, Function]}
+   */
   const [isSideBarToggled, setIsSideBarToggled] = useState(true);
 
+  /**
+   * State to manage the open/closed status of the second-level submenus (child menus).
+   * The key is the index of the submenu item, and the value is a boolean.
+   * Allows only one child menu to be open at a time.
+   * @type {[object, Function]}
+   */
   const [openChildMenu, setOpenChildMenu] = useState({});
 
+  /**
+   * Toggles the visibility of a first-level submenu.
+   * Closes any currently open submenu before opening a new one.
+   * @param {number} index - The index of the menu item to toggle.
+   */
   const toggleSubMenu = (index) => {
     setOpenSubMenu((prev) => {
       const isCurrentlyOpen = !!prev[index];
       return isCurrentlyOpen ? {} : { [index]: true };
     });
   };
+  /**
+   * Toggles the visibility of a second-level submenu (child menu).
+   * Closes any currently open child menu before opening a new one.
+   * @param {number} index - The index of the submenu item to toggle.
+   */
   const toggleChildMenu = (index) => {
-    console.log(index);
-
     setOpenChildMenu((prev) => {
       const isCurrentlyOpen = !!prev[index];
       return isCurrentlyOpen ? {} : { [index]: true };

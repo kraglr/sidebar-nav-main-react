@@ -31,13 +31,13 @@ You need to have [Node.js](https://nodejs.org/) (version 18.x or later is recomm
     Open your terminal or command prompt and run the following command to clone the project. Be sure to replace the URL with your actual repository URL.
 
     ```sh
-    git clone https://github.com/your-username/react-training_v2.git
+    git clone https://github.com/kraglr/sidebar-nav-main-react.git
     ```
 
 2.  **Navigate to the project directory:**
 
     ```sh
-    cd react-training_v2
+    cd sidebar-nav-main-react
     ```
 
 3.  **Install dependencies:**
