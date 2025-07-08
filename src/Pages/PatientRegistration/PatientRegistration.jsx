@@ -1,6 +1,111 @@
-import React from "react";
+import React, { useState } from "react";
+
+const defaultList = [
+  {
+    CODE: "2024-000011",
+    U_LASTNAME: "JUNIO",
+    U_FIRSTNAME: "MELECIO",
+    U_MIDDLENAME: "MONTEMAYOR",
+    U_EXTNAME: null,
+    U_BIRTHDATE: "1957-09-14",
+    U_GENDER: "Male",
+    U_VISITCOUNT: 1,
+  },
+  {
+    CODE: "2024-000012",
+    U_LASTNAME: "LAMSEN",
+    U_FIRSTNAME: "ZOSIMO",
+    U_MIDDLENAME: "SEGUNDO",
+    U_EXTNAME: null,
+    U_BIRTHDATE: "1970-03-21",
+    U_GENDER: "Male",
+    U_VISITCOUNT: 1,
+  },
+  {
+    CODE: "2024-000013",
+    U_LASTNAME: "LUMACTOD",
+    U_FIRSTNAME: "JAIME",
+    U_MIDDLENAME: "DIAZ",
+    U_EXTNAME: null,
+    U_BIRTHDATE: "1981-03-19",
+    U_GENDER: "Male",
+    U_VISITCOUNT: 1,
+  },
+  {
+    CODE: "2024-000014",
+    U_LASTNAME: "MADARANG",
+    U_FIRSTNAME: "JAY",
+    U_MIDDLENAME: "COBANGCOBANG",
+    U_EXTNAME: null,
+    U_BIRTHDATE: "1978-11-04",
+    U_GENDER: "Male",
+    U_VISITCOUNT: 1,
+  },
+  {
+    CODE: "2024-000015",
+    U_LASTNAME: "CABILIN",
+    U_FIRSTNAME: "RUBY",
+    U_MIDDLENAME: "TULIAO",
+    U_EXTNAME: null,
+    U_BIRTHDATE: "1982-04-10",
+    U_GENDER: "Female",
+    U_VISITCOUNT: 1,
+  },
+  {
+    CODE: "2024-000016",
+    U_LASTNAME: "CAMORONGAN",
+    U_FIRSTNAME: "CARMELITA",
+    U_MIDDLENAME: "GARCIA",
+    U_EXTNAME: null,
+    U_BIRTHDATE: "1949-10-30",
+    U_GENDER: "Female",
+    U_VISITCOUNT: 1,
+  },
+  {
+    CODE: "2024-000017",
+    U_LASTNAME: "NANLABI",
+    U_FIRSTNAME: "JUDILENE",
+    U_MIDDLENAME: "MEJIA",
+    U_EXTNAME: null,
+    U_BIRTHDATE: "1993-10-16",
+    U_GENDER: "Female",
+    U_VISITCOUNT: 1,
+  },
+  {
+    CODE: "2024-000018",
+    U_LASTNAME: "BASCO",
+    U_FIRSTNAME: "MARIA CLARA",
+    U_MIDDLENAME: "PEREZ",
+    U_EXTNAME: null,
+    U_BIRTHDATE: "1969-08-15",
+    U_GENDER: "Female",
+    U_VISITCOUNT: 1,
+  },
+  {
+    CODE: "2024-000019",
+    U_LASTNAME: "FORTIN",
+    U_FIRSTNAME: "CRISANTO",
+    U_MIDDLENAME: "ROSARIO",
+    U_EXTNAME: null,
+    U_BIRTHDATE: "1981-11-22",
+    U_GENDER: "Male",
+    U_VISITCOUNT: 1,
+  },
+  {
+    CODE: "2024-000020",
+    U_LASTNAME: "PATA",
+    U_FIRSTNAME: "JINGJING",
+    U_MIDDLENAME: "POLICARPIO",
+    U_EXTNAME: "",
+    U_BIRTHDATE: "1984-07-08",
+    U_GENDER: "Female",
+    U_VISITCOUNT: 1,
+  },
+];
 
 const PatientRegistration = () => {
+  const [patientList, setPatientList] = useState(defaultList);
+
   return (
     <>
       {/* <div className="flex justify-between w-full flex-wrap transition-all duration-300 ease-in-out">
@@ -57,18 +162,36 @@ const PatientRegistration = () => {
 
       <div className="w-full">
         <table className="w-full">
-          <thead className="text-gray-900">
-            <tr>
-              <th>MRN</th>
-              <th>Last Name</th>
-              <th>First Name</th>
-              <th>Middle Name</th>
-              <th>Ext.</th>
-              <th>Birthdate</th>
-              <th>Sex</th>
-              <th>No. of Case</th>
+          <thead className="bg-gray-900 text-gray-300 ">
+            <tr className="">
+              <th className="py-2">MRN</th>
+              <th className="py-2">Last Name</th>
+              <th className="py-2">First Name</th>
+              <th className="py-2">Middle Name</th>
+              <th className="py-2">Ext.</th>
+              <th className="py-2">Birthdate</th>
+              <th className="py-2">Sex</th>
+              <th className="py-2">No. of Case</th>
             </tr>
           </thead>
+          <tbody>
+            {patientList.map((patient) => {
+              return (
+                <tr
+                  key={patient.CODE}
+                  className="odd:bg-gray-100 even:bg-gray-200 border-b-1 border-gray-900 hover:bg-gray-300 cursor-pointer"
+                >
+                  {Object.entries(patient).map(([key, value]) => {
+                    return (
+                      <td className="py-2 px-2  text-gray-900" key={key}>
+                        {value}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </div>
     </>
