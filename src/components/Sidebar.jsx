@@ -122,7 +122,7 @@ const menuItems = [
  * @param {object} props.subItem - The menu item object which contains a submenu to be rendered as a child menu.
  * @returns {JSX.Element} The rendered child menu list.
  */
-const ChildMenu = ({ subItem, navigate }) => {
+const ChildMenu = ({ subItem, navigate, setPageName }) => {
   return (
     <>
       <ul className="list-none pl-8 ">
@@ -132,7 +132,10 @@ const ChildMenu = ({ subItem, navigate }) => {
               key={`${childIdx}-${childItem.label}`}
               className="px-2 py-1 bg-gray-600 hover:bg-gray-900 cursor-pointer"
               role="button"
-              onClick={() => navigate(childItem.route)}
+              onClick={() => {
+                navigate(childItem.route);
+                setPageName(childItem.label);
+              }}
             >
               {childItem.label}
             </li>
@@ -159,6 +162,7 @@ const SubMenu = ({
   toggleChildMenu,
   openChildMenu,
   navigate,
+  setPageName,
 }) => {
   return (
     <>
@@ -181,6 +185,7 @@ const SubMenu = ({
                     toggleChildMenu(subIdx);
                   } else {
                     navigate(subItem.route);
+                    setPageName(subItem.label);
                   }
                 }}
               >
@@ -189,7 +194,11 @@ const SubMenu = ({
               </li>
 
               {hasChildMenu && openChildMenu[subIdx] && (
-                <ChildMenu subItem={subItem} navigate={navigate} />
+                <ChildMenu
+                  subItem={subItem}
+                  navigate={navigate}
+                  setPageName={setPageName}
+                />
               )}
             </>
           );
@@ -205,7 +214,7 @@ const SubMenu = ({
  * It manages its own state for toggling the sidebar and opening/closing submenus.
  * @returns {JSX.Element} The rendered Sidebar component.
  */
-const Sidebar = ({ isSideBarToggled, setIsSideBarToggled }) => {
+const Sidebar = ({ isSideBarToggled, setIsSideBarToggled, setPageName }) => {
   const navigate = useNavigate();
 
   /**
@@ -250,7 +259,7 @@ const Sidebar = ({ isSideBarToggled, setIsSideBarToggled }) => {
   return (
     <>
       <aside
-        className={` flex flex-col lg:relative fixed   bg-gray-900 text-white min-h-screen lg:overflow-x-visible overflow-x-auto  py-2 transition-all duration-300 ease-in-out  ${
+        className={` flex flex-col lg:relative fixed   bg-gray-900 text-white max-h-screen lg:overflow-x-visible overflow-x-auto  py-2 transition-all duration-300 ease-in-out  ${
           isSideBarToggled
             ? "w-[280px] px-2"
             : "lg:w-[80px] lg:px-2  w-[0px] px-0 "
@@ -291,6 +300,7 @@ const Sidebar = ({ isSideBarToggled, setIsSideBarToggled }) => {
                         toggleSubMenu(id);
                       } else {
                         navigate(item.route);
+                        setPageName(item.label);
                       }
                     }}
                   >
@@ -327,6 +337,7 @@ const Sidebar = ({ isSideBarToggled, setIsSideBarToggled }) => {
                       openChildMenu={openChildMenu}
                       navigate={navigate}
                       key={id}
+                      setPageName={setPageName}
                     />
                   )}
                 </li>

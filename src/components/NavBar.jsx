@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
-const NavBar = ({ isSideBarToggled, setIsSideBarToggled }) => {
+const NavBar = ({ isSideBarToggled, setIsSideBarToggled, pageName }) => {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const NavBar = ({ isSideBarToggled, setIsSideBarToggled }) => {
               onClick={() => setIsSideBarToggled(!isSideBarToggled)}
             />
           </span> */}
-          <span>Page</span>
+          <span>{pageName}</span>
         </div>
         <div className="flex"></div>
       </div>

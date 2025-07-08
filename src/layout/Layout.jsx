@@ -10,15 +10,18 @@ const Layout = () => {
    */
   const [isSideBarToggled, setIsSideBarToggled] = useState(true);
 
+  const [pageName, setPageName] = useState("");
+
   return (
     <>
       <div className="flex w-screen h-screen">
         <Sidebar
           isSideBarToggled={isSideBarToggled}
           setIsSideBarToggled={setIsSideBarToggled}
+          setPageName={setPageName}
         />
         <div
-          className={`flex flex-col   ${
+          className={`flex flex-col bg-gray-300  ${
             isSideBarToggled
               ? "lg:w-[cal(100%-280px)] "
               : "lg:w-[cal(100%-80px)]  "
@@ -27,8 +30,9 @@ const Layout = () => {
           <NavBar
             isSideBarToggled={isSideBarToggled}
             setIsSideBarToggled={setIsSideBarToggled}
+            pageName={pageName}
           />
-          <main className="p-2 m-2 border-2 border-gray-300 rounded-lg flex-grow-1">
+          <main className="p-2 m-2 border-2  border-gray-900 rounded-lg flex-grow-1">
             <Outlet />
           </main>
         </div>

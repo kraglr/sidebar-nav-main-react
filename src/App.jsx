@@ -1,9 +1,14 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router";
 import "./App.css";
 import Sidebar from "./components/Sidebar";
 import Layout from "./layout/Layout";
-import Dashboard from "./Pages/Home/Dashboard";
-import PatientRegistration from "./Pages/PatientRegistration/PatientRegistration";
+import { LoadingThreeDots } from "./components/Loader";
+
+const Dashboard = lazy(() => import("./Pages/Home/Dashboard"));
+const PatientRegistration = lazy(() =>
+  import("./Pages/PatientRegistration/PatientRegistration")
+);
 
 /**
  * The main application component.
@@ -13,17 +18,19 @@ import PatientRegistration from "./Pages/PatientRegistration/PatientRegistration
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route
-              path="/patient-registration"
-              element={<PatientRegistration />}
-            />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <Suspense fallback={<LoadingThreeDots />}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route
+                path="/patient-registration"
+                element={<PatientRegistration />}
+              />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </Suspense>
     </>
   );
 }
