@@ -3,6 +3,7 @@ import * as MuiIcons from "@mui/icons-material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import MenuIcon from "@mui/icons-material/Menu";
+import ClearIcon from "@mui/icons-material/Clear";
 const menuItems = [
   {
     label: "Dashboard",
@@ -197,7 +198,7 @@ const SubMenu = ({
  * It manages its own state for toggling the sidebar and opening/closing submenus.
  * @returns {JSX.Element} The rendered Sidebar component.
  */
-const Sidebar = () => {
+const Sidebar = ({ isSideBarToggled, setIsSideBarToggled }) => {
   /**
    * State to manage the open/closed status of the first-level submenus.
    * The key is the index of the menu item, and the value is a boolean.
@@ -205,11 +206,6 @@ const Sidebar = () => {
    * @type {[object, Function]}
    */
   const [openSubMenu, setOpenSubMenu] = useState({});
-  /**
-   * State to manage the toggled (expanded/collapsed) state of the entire sidebar.
-   * @type {[boolean, Function]}
-   */
-  const [isSideBarToggled, setIsSideBarToggled] = useState(true);
 
   /**
    * State to manage the open/closed status of the second-level submenus (child menus).
@@ -245,22 +241,26 @@ const Sidebar = () => {
   return (
     <>
       <aside
-        className={` flex flex-col lg:relative fixed   bg-gray-900 text-white min-h-screen lg:overflow-x-visible overflow-x-auto  py-4  transition-all duration-300 ease-in-out  ${
+        className={` flex flex-col lg:relative fixed   bg-gray-900 text-white min-h-screen lg:overflow-x-visible overflow-x-auto  py-2 transition-all duration-300 ease-in-out  ${
           isSideBarToggled
             ? "w-[280px] px-2"
             : "lg:w-[80px] lg:px-2  w-[0px] px-0 "
         }`}
       >
         <div
-          className={`flex overflow-x-visible items-center mb-4 ${
-            isSideBarToggled ? "justify-between" : "justify-center"
+          className={`flex overflow-x-visible  items-center py-1 align-middle  ${
+            isSideBarToggled
+              ? "border-b-1 border-b-gray-100 lg:justify-center justify-between"
+              : ""
           }`}
         >
-          {isSideBarToggled && <h4>CareTeQ</h4>}
-          <MenuIcon
-            className="cursor-pointer"
+          <h4>CareTeQ</h4>
+          <span
+            className="cursor-pointer lg:hidden block"
             onClick={() => setIsSideBarToggled(!isSideBarToggled)}
-          />
+          >
+            <ClearIcon />
+          </span>
         </div>
         <ul className="list-none ">
           {menuItems.map((item, id) => {
