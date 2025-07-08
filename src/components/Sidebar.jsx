@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+
+import { useNavigate } from "react-router";
 import * as MuiIcons from "@mui/icons-material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import MenuIcon from "@mui/icons-material/Menu";
 import ClearIcon from "@mui/icons-material/Clear";
+
 const menuItems = [
   {
     label: "Dashboard",
@@ -119,7 +122,7 @@ const menuItems = [
  * @param {object} props.subItem - The menu item object which contains a submenu to be rendered as a child menu.
  * @returns {JSX.Element} The rendered child menu list.
  */
-const ChildMenu = ({ subItem }) => {
+const ChildMenu = ({ subItem, navigate }) => {
   return (
     <>
       <ul className="list-none pl-8 ">
@@ -129,6 +132,7 @@ const ChildMenu = ({ subItem }) => {
               key={`${childIdx}-${childItem.label}`}
               className="px-2 py-1 bg-gray-600 hover:bg-gray-900 cursor-pointer"
               role="button"
+              onClick={() => navigate(childItem.route)}
             >
               {childItem.label}
             </li>
@@ -154,6 +158,7 @@ const SubMenu = ({
   isSideBarToggled,
   toggleChildMenu,
   openChildMenu,
+  navigate,
 }) => {
   return (
     <>
@@ -174,6 +179,8 @@ const SubMenu = ({
                 onClick={() => {
                   if (hasChildMenu) {
                     toggleChildMenu(subIdx);
+                  } else {
+                    navigate(subItem.route);
                   }
                 }}
               >
@@ -182,7 +189,7 @@ const SubMenu = ({
               </li>
 
               {hasChildMenu && openChildMenu[subIdx] && (
-                <ChildMenu subItem={subItem} />
+                <ChildMenu subItem={subItem} navigate={navigate} />
               )}
             </>
           );
@@ -199,6 +206,8 @@ const SubMenu = ({
  * @returns {JSX.Element} The rendered Sidebar component.
  */
 const Sidebar = ({ isSideBarToggled, setIsSideBarToggled }) => {
+  const navigate = useNavigate();
+
   /**
    * State to manage the open/closed status of the first-level submenus.
    * The key is the index of the menu item, and the value is a boolean.
@@ -280,6 +289,8 @@ const Sidebar = ({ isSideBarToggled, setIsSideBarToggled }) => {
                     onClick={() => {
                       if (hasSubMenu) {
                         toggleSubMenu(id);
+                      } else {
+                        navigate(item.route);
                       }
                     }}
                   >
@@ -314,6 +325,8 @@ const Sidebar = ({ isSideBarToggled, setIsSideBarToggled }) => {
                       isSideBarToggled={isSideBarToggled}
                       toggleChildMenu={toggleChildMenu}
                       openChildMenu={openChildMenu}
+                      navigate={navigate}
+                      key={id}
                     />
                   )}
                 </li>

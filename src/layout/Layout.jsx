@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import NavBar from "../components/NavBar";
+import { Outlet } from "react-router";
 
 const Layout = () => {
   /**
@@ -11,7 +12,7 @@ const Layout = () => {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex w-screen h-screen">
         <Sidebar
           isSideBarToggled={isSideBarToggled}
           setIsSideBarToggled={setIsSideBarToggled}
@@ -21,13 +22,15 @@ const Layout = () => {
             isSideBarToggled
               ? "lg:w-[cal(100%-280px)] "
               : "lg:w-[cal(100%-80px)]  "
-          } w-full `}
+          } flex-grow-1`}
         >
           <NavBar
             isSideBarToggled={isSideBarToggled}
             setIsSideBarToggled={setIsSideBarToggled}
           />
-          <main className="bg-amber-100">asdasd</main>
+          <main className="p-2 m-2 border-2 border-gray-300 rounded-lg flex-grow-1">
+            <Outlet />
+          </main>
         </div>
       </div>
     </>
