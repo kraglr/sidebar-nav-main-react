@@ -167,7 +167,7 @@ const SubMenu = ({
   return (
     <>
       <ul
-        className={`list-none py-1 px-2  z-99 transition-all duration-300 ease-in-out  ${
+        className={`list-none py-1 px-2  z-[500] transition-all duration-300 ease-in-out  ${
           isSideBarToggled
             ? "pl-8 bg-gray-700"
             : "lg:absolute lg:left-22 relative bg-gray-900"
@@ -259,7 +259,7 @@ const Sidebar = ({ isSideBarToggled, setIsSideBarToggled, setPageName }) => {
   return (
     <>
       <aside
-        className={` flex flex-col lg:relative fixed   bg-gray-900 text-white h-screen lg:overflow-x-visible overflow-x-auto  py-2 transition-all duration-300 ease-in-out  ${
+        className={` flex flex-col lg:relative fixed z-500  bg-gray-900 text-white h-screen lg:overflow-x-visible overflow-x-auto  py-2 transition-all duration-300 ease-in-out  ${
           isSideBarToggled
             ? "w-[280px] px-2"
             : "lg:w-[80px] lg:px-2  w-[0px] px-0 "

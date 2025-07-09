@@ -32,7 +32,7 @@ const Layout = () => {
             setIsSideBarToggled={setIsSideBarToggled}
             pageName={pageName}
           />
-          <main className="p-2 m-2 border-2  border-gray-900 rounded-lg flex-grow-1">
+          <main className="p-2 m-2 border-2 overflow-x-hidden  border-gray-900 rounded-lg flex-grow-1">
             <Outlet />
           </main>
         </div>
