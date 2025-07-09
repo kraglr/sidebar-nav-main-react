@@ -4,6 +4,7 @@ import "./App.css";
 import Sidebar from "./components/Sidebar";
 import Layout from "./layout/Layout";
 import { LoadingThreeDots } from "./components/Loader";
+import PatientInformation from "./Pages/PatientRegistration/PatientInformation";
 
 const Dashboard = lazy(() => import("./Pages/Home/Dashboard"));
 const PatientRegistration = lazy(() =>
@@ -26,6 +27,10 @@ function App() {
               <Route
                 path="/patient-registration"
                 element={<PatientRegistration />}
+              />
+              <Route
+                path="/patient-information"
+                element={<PatientInformation />}
               />
             </Route>
           </Routes>
