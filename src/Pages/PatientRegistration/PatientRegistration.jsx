@@ -1,5 +1,21 @@
 import React, { useState } from "react";
 
+/**
+ * @typedef {object} Patient
+ * @property {string} CODE - The patient's Medical Record Number (MRN).
+ * @property {string} U_LASTNAME - The patient's last name.
+ * @property {string} U_FIRSTNAME - The patient's first name.
+ * @property {string | null} U_MIDDLENAME - The patient's middle name.
+ * @property {string | null} U_EXTNAME - The patient's name extension (e.g., Jr., Sr.).
+ * @property {string} U_BIRTHDATE - The patient's birthdate in 'YYYY-MM-DD' format.
+ * @property {string} U_GENDER - The patient's gender.
+ * @property {number} U_VISITCOUNT - The number of visits the patient has had.
+ */
+
+/**
+ * Default list of patients used for initial state. This serves as mock data.
+ * @type {Patient[]}
+ */
 const defaultList = [
   {
     CODE: "2024-000011",
@@ -103,7 +119,17 @@ const defaultList = [
   },
 ];
 
+/**
+ * Renders the patient registration page.
+ * This component displays a list of patients in a table and provides UI for searching,
+ * adding new patients, and controlling pagination.
+ * @returns {JSX.Element} The rendered PatientRegistration component.
+ */
 const PatientRegistration = () => {
+  /**
+   * State to hold the list of patients to be displayed, initialized with mock data.
+   * @type {[Patient[], Function]}
+   */
   const [patientList, setPatientList] = useState(defaultList);
 
   return (

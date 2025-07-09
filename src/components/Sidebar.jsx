@@ -259,7 +259,7 @@ const Sidebar = ({ isSideBarToggled, setIsSideBarToggled, setPageName }) => {
   return (
     <>
       <aside
-        className={` flex flex-col lg:relative fixed   bg-gray-900 text-white max-h-screen lg:overflow-x-visible overflow-x-auto  py-2 transition-all duration-300 ease-in-out  ${
+        className={` flex flex-col lg:relative fixed   bg-gray-900 text-white h-screen lg:overflow-x-visible overflow-x-auto  py-2 transition-all duration-300 ease-in-out  ${
           isSideBarToggled
             ? "w-[280px] px-2"
             : "lg:w-[80px] lg:px-2  w-[0px] px-0 "
@@ -272,7 +272,13 @@ const Sidebar = ({ isSideBarToggled, setIsSideBarToggled, setPageName }) => {
               : ""
           }`}
         >
-          <h4>CareTeQ</h4>
+          <h4
+            className={`${
+              isSideBarToggled ? "visible" : "lg:invisible visible"
+            }`}
+          >
+            CareTeQ
+          </h4>
           <span
             className="cursor-pointer lg:hidden block"
             onClick={() => setIsSideBarToggled(!isSideBarToggled)}
