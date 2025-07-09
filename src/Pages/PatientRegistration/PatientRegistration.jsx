@@ -4,10 +4,12 @@ import axios from "axios";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
+import { useModal } from "../../context/ModalContext";
 import {
   LoadingThreeDots,
   LoadingThreeDotsRelative,
 } from "../../components/Loader";
+import SelectCaseTypeModal from "../../features/modals/SelectCaseTypeModal";
 
 /**
  * Renders the patient registration page.
@@ -16,6 +18,7 @@ import {
  * @returns {JSX.Element} The rendered PatientRegistration component.
  */
 const PatientRegistration = () => {
+  const { showModal, hideModal, isModalOpen, modal } = useModal();
   /**
    * State to hold the list of patients to be displayed, initialized with mock data.
    * @type {[Patient[], Function]}
@@ -79,7 +82,12 @@ const PatientRegistration = () => {
         </div>
         <div className="col-span-1 grid grid-cols-2 gap-x-2">
           <div className="grid col-span-1 md:justify-center justify-start items-end   ">
-            <button className=" bg-gray-900 text-white px-2 py-1 rounded-md cursor-pointer hover:bg-gray-700  text-center text-nowrap">
+            <button
+              className=" bg-gray-900 text-white px-2 py-1 rounded-md cursor-pointer hover:bg-gray-700  text-center text-nowrap"
+              onClick={() => {
+                showModal("select-case-type-modal", { casetype: "Inpatient" });
+              }}
+            >
               Add New Patient
             </button>
           </div>
@@ -207,6 +215,10 @@ const PatientRegistration = () => {
           </table>
         )}
       </div>
+
+      {isModalOpen && modal.name === "select-case-type-modal" && (
+        <SelectCaseTypeModal modal={modal} hideModal={hideModal} />
+      )}
     </div>
   );
 };
