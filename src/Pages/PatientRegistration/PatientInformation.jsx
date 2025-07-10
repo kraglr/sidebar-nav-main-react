@@ -134,7 +134,6 @@ const PatientInformation = () => {
               handleChange={patientChange}
             />
           )}
-          {activeTab === "bit" && <PatientInfoTab />}
         </div>
       </div>
     </>

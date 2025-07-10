@@ -436,6 +436,7 @@ const PatientInfoTab = ({ mrnSelected, formValues, handleChange }) => {
             </div>
           </div>
         </div>
+        <button> Save</button>
       </div>
     </>
   );

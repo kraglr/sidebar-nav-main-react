@@ -1,11 +1,11 @@
 import React, { useReducer, useState } from "react";
 
 const funcDispatch = (state, action) => {
+  console.log(action);
+
   switch (action.type) {
     case "ADD_INPUT":
       return { ...state, [action.name]: action.value };
-    case "SEARCH_INPUT":
-      return state;
     case "RESET_FORM":
       return action.payload;
     default:
@@ -17,13 +17,17 @@ const useForm = () => {
   const [values, setValues] = useState({});
   const [formValues, dispatch] = useReducer(funcDispatch, values);
 
-  const handleChange = (e, type = "ADD_INPUT") => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch({
-      type: type,
+      type: "ADD_INPUT",
       name: name,
       value: value,
     });
+
+    setValues({ ...values, [name]: value });
+
+    console.log(value, values, formValues);
   };
 
   const resetForm = () => {
