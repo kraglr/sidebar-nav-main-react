@@ -259,7 +259,7 @@ const Sidebar = ({ isSideBarToggled, setIsSideBarToggled, setPageName }) => {
   return (
     <>
       <aside
-        className={` flex flex-col lg:relative fixed z-500  bg-gray-900 text-white h-screen lg:overflow-x-visible overflow-x-auto  py-2 transition-all duration-300 ease-in-out  ${
+        className={` flex flex-col lg:relative fixed z-500  bg-gray-900 text-white h-full lg:overflow-x-visible overflow-x-auto  py-2 transition-all duration-300 ease-in-out  ${
           isSideBarToggled
             ? "w-[280px] px-2"
             : "lg:w-[80px] lg:px-2  w-[0px] px-0 "
