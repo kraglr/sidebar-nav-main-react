@@ -1,6 +1,33 @@
+import axios from "axios";
 import React from "react";
 
-const PatientInfoTab = ({ mrnSelected, formValues, handleChange }) => {
+const PatientInfoTab = ({
+  action,
+  mrnSelected,
+  formValues,
+  handleChange,
+  patientSubmit,
+  patientError,
+  showError,
+}) => {
+  const handleSubmit = async (values) => {
+    console.log("here");
+
+    try {
+      const data = await axios.post(
+        `http://localhost:8000/api/patients/save-patient-info`,
+        {
+          data: values,
+          action: action,
+        }
+      );
+
+      console.log(data);
+    } catch (error) {
+      patientError(error.message);
+      console.log(showError);
+    }
+  };
   return (
     <>
       <div
@@ -8,6 +35,7 @@ const PatientInfoTab = ({ mrnSelected, formValues, handleChange }) => {
       >
         <form id="basic-personal-info-form">
           {/* START OF MRN, PREFIX, CHECKBOX */}
+          {!!showError && <span className="text-red-900">{showError}</span>}
           <div className={`grid lg:grid-cols-2 grid-cols-1 gap-2 mb-3`}>
             <div className="col-span-1 grid gap-2 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 order-1 lg:order-0">
               <div className="col-span-1 ">
@@ -19,7 +47,7 @@ const PatientInfoTab = ({ mrnSelected, formValues, handleChange }) => {
                   name="CODE"
                   value={formValues.CODE || ""}
                   onChange={handleChange}
-                  className="bg-gray-200 text-gray-900 w-full border cursor-not-allowed rounded-full px-3 py-2 focus:outline-none focus:ring-2  mt-auto"
+                  className="bg-gray-200 text-gray-900 w-full border cursor-not-allowed rounded-full px-3 py-2 focus:outline-none focus:ring-2  mt-auto "
                 />
               </div>
 
@@ -519,6 +547,14 @@ const PatientInfoTab = ({ mrnSelected, formValues, handleChange }) => {
         </form>
         {/* END OF STREET AND ZIPCODE*/}
         <hr className="my-3" />
+        <div className="flex py-2 px-1 items-end">
+          <button
+            className="bg-gray-900 hover:bg-gray-700"
+            onClick={patientSubmit(handleSubmit)}
+          >
+            Save
+          </button>
+        </div>
       </div>
     </>
   );

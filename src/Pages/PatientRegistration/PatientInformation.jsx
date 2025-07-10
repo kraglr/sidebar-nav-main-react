@@ -13,6 +13,9 @@ const PatientInformation = () => {
     setValues: apiValue,
     values: patientValues,
     handleChange: patientChange,
+    handleSubmit: patientSubmit,
+    setIsError: patientError,
+    isError: showError,
   } = useForm();
 
   const fetchPatientInfo = useCallback(async () => {
@@ -132,6 +135,10 @@ const PatientInformation = () => {
               mrnSelected={mrnSelected}
               formValues={patientValues}
               handleChange={patientChange}
+              patientSubmit={patientSubmit}
+              patientError={patientError}
+              action={action}
+              showError={showError}
             />
           )}
         </div>

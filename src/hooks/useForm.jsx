@@ -1,8 +1,6 @@
 import React, { useReducer, useState } from "react";
 
 const funcDispatch = (state, action) => {
-  console.log(action);
-
   switch (action.type) {
     case "ADD_INPUT":
       return { ...state, [action.name]: action.value };
@@ -16,6 +14,7 @@ const funcDispatch = (state, action) => {
 const useForm = () => {
   const [values, setValues] = useState({});
   const [formValues, dispatch] = useReducer(funcDispatch, values);
+  const [isError, setIsError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,12 +38,19 @@ const useForm = () => {
 
   const handleSubmit = (callback) => (e) => {
     e.preventDefault();
+    console.log("here");
+
+    callback(!formValues ? formValues : values);
+    console.log("here");
   };
 
   return {
     setValues,
     values,
     handleChange,
+    handleSubmit,
+    setIsError,
+    isError,
   };
 };
 
