@@ -1,6 +1,6 @@
 import React from "react";
 
-const PatientInfoTab = ({ mrnSelected }) => {
+const PatientInfoTab = ({ mrnSelected, formValues, handleChange }) => {
   return (
     <>
       <div className="grid grid-cols-1 bg-gray-100 text-gray-900 rounded-l-md rounded-tr-none rounded-br-md px-4 py-2 gap-y-3">
@@ -87,8 +87,10 @@ const PatientInfoTab = ({ mrnSelected }) => {
               <input
                 type="text"
                 id="lastName"
-                name="lastName"
+                name="U_LASTNAME"
                 className="border-1 border-gray-400 rounded-full text-gray-900 px-4 py-2 w-full bg-white"
+                value={formValues.U_LASTNAME}
+                onChange={handleChange}
               />
             </div>
             <div className="col-span-1">

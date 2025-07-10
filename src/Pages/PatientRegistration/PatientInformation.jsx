@@ -4,12 +4,16 @@ import profiledefault from "../../assets/img/profile.jpeg";
 import PatientInfoTab from "../PatientInformation/PatientInfoTab";
 import { useParams } from "react-router";
 import axios from "axios";
+import useForm from "@/hooks/useForm";
 
 const PatientInformation = () => {
   const { action, mrnSelected, caseType } = useParams();
   const [activeTab, setActiveTab] = useState("pit");
-
-  const [patientInfo, setPatientInfo] = useState({});
+  const {
+    setValues: apiValue,
+    values: patientValues,
+    handleChange: patientChange,
+  } = useForm();
 
   const fetchPatientInfo = useCallback(async () => {
     const res = await axios.get(
@@ -22,9 +26,9 @@ const PatientInformation = () => {
       }
     );
 
-    setPatientInfo(res.data?.infoPatient);
+    apiValue(res.data?.infoPatient);
     // console.log(patient);
-  }, [mrnSelected, caseType]);
+  }, [mrnSelected, caseType, apiValue]);
 
   useEffect(() => {
     console.log(mrnSelected, caseType);
@@ -123,7 +127,13 @@ const PatientInformation = () => {
               </ul>
             </nav>
           </div>
-          {activeTab === "pit" && <PatientInfoTab mrnSelected={mrnSelected} />}
+          {activeTab === "pit" && (
+            <PatientInfoTab
+              mrnSelected={mrnSelected}
+              formValues={patientValues}
+              handleChange={patientChange}
+            />
+          )}
           {activeTab === "bit" && <PatientInfoTab />}
         </div>
       </div>
