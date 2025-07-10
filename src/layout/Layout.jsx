@@ -14,7 +14,7 @@ const Layout = () => {
 
   return (
     <>
-      <div className="flex w-screen min-h-screen">
+      <div className="flex w-screen min-h-screen max-w-screen overflow-x-hidden">
         <Sidebar
           isSideBarToggled={isSideBarToggled}
           setIsSideBarToggled={setIsSideBarToggled}
@@ -25,7 +25,7 @@ const Layout = () => {
             isSideBarToggled
               ? "lg:w-[cal(100%-280px)] "
               : "lg:w-[cal(100%-80px)]  "
-          } flex-grow-1`}
+          } flex-grow-1 max-h-screen overflow-x-hidden`}
         >
           <NavBar
             isSideBarToggled={isSideBarToggled}

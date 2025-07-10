@@ -61,6 +61,11 @@ const PatientRegistration = () => {
     clearTimeout();
   };
 
+  // useEffect(() => {
+  //   return () => {
+  //     hideModal();
+  //   };
+  // });
   useEffect(() => {
     fetchPatientList(searchParam, sortCol, sortDir);
   }, [searchParam, sortCol, sortDir]);
@@ -85,7 +90,7 @@ const PatientRegistration = () => {
             <button
               className=" bg-gray-900 text-white px-2 py-1 rounded-md cursor-pointer hover:bg-gray-700  text-center text-nowrap"
               onClick={() => {
-                showModal("select-case-type-modal", { casetype: "Inpatient" });
+                showModal("select-case-type-modal");
               }}
             >
               Add New Patient
@@ -194,12 +199,19 @@ const PatientRegistration = () => {
                 <th className="py-2">No. of Case</th>
               </tr>
             </thead>
+
             <tbody>
               {patientList.map((patient) => {
                 return (
                   <tr
                     key={patient.CODE}
                     className="odd:bg-gray-100 even:bg-gray-200 border-b-1 border-gray-900 hover:bg-gray-300 cursor-pointer"
+                    data-value={JSON.stringify(patient)}
+                    onDoubleClick={() => {
+                      showModal("select-case-type-modal", {
+                        patientData: patient,
+                      });
+                    }}
                   >
                     {Object.entries(patient).map(([key, value]) => {
                       return (

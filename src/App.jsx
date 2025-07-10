@@ -29,7 +29,7 @@ function App() {
                 element={<PatientRegistration />}
               />
               <Route
-                path="/patient-information"
+                path="/patient-information/:action/:mrnSelected/:caseType"
                 element={<PatientInformation />}
               />
             </Route>

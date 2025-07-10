@@ -8,7 +8,7 @@ export const ModalContextProvider = ({ children }) => {
   const [modal, setModal] = useState({});
 
   const showModal = (name, data = {}) => {
-    // console.log(name, data);
+    console.log(name, data);
     setModal({ name: name, data: data });
 
     setIsModalOpen(true);

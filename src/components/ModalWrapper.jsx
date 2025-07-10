@@ -10,13 +10,13 @@ import ClearIcon from "@mui/icons-material/Clear";
 const ModalWrapper = ({
   open,
   onClose,
-  title = "asd",
+  title = "",
   children,
   closeBtn = true,
   disableOutsideClick = true,
   footer,
   contentClassName = "sm:max-w-xl",
-  headerClass = "bg-gray-900 text-white py-2 px-4 rounded-t-md",
+  headerClass = "",
 }) => {
   return (
     <Dialog
@@ -36,7 +36,7 @@ const ModalWrapper = ({
               transition={{ duration: 0.2 }}
             >
               <DialogHeader
-                className={`flex flex-row align-middle justify-between items-center  ${headerClass}`}
+                className={`flex flex-row align-middle justify-between items-center  bg-gray-900 text-white py-2 px-4 rounded-t-md  ${headerClass}`}
               >
                 <DialogTitle>{title}</DialogTitle>
                 {closeBtn && <ClearIcon onClick={onClose} />}
